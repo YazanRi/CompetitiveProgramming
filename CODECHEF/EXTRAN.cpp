@@ -34,15 +34,12 @@ int mmx(int i)
 }
 int main()
 {
-    int t,mx,mn; scanf("%d",&t);
+    int t; scanf("%d",&t);
     while(t--)
     {
-        mx=-1,mn=2e9;
         scanf("%d",&n);
         for(int i=0;i<n;i++)
-            scanf("%d",&a[i]),
-            mx=max(mx,a[i]),
-            mn=min(mn,a[i]);
+            scanf("%d",&a[i]);
         sort(a,a+n);
         for(int i=0;i<n;i++)
             if(BS(a[i])||a[i]+1<mmn(i)||a[i]-1>mmx(i))
