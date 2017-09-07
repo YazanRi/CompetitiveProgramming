@@ -4,24 +4,17 @@ using namespace std;
 int main()
 {
     int t; cin>>t;
-    LL d,k,a,b;
+    LL d,k,a;
     while(t--)
     {
-        a=b=0;
         cin>>d>>k;
-        for(LL i=1;i*i<=d;i++)
+        a=0;
+        for(LL i=0;i*i<=d;i++)
         {
-            if(d%i==0)
-            {
-                if(i%4==1)a++;
-                if(i%4==3)b++;
-                if(d/i!=i)
-                {
-                    if((d/i)%4==1)a++;
-                    if((d/i)%4==3)b++;
-                }
-            }
+            LL s=d-i*i;
+            LL q=sqrt(s);
+            if(q*q==s)a+=(i&&q?4:2);
         }
-        cout<<(k>=4*(a-b)?"possible\n":"impossible\n");
+        cout<<(k>=a?"possible\n":"impossible\n");
     }
 }
