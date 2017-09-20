@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 #define LL long long
 using namespace std;
+
+//	I found this solution with observation and I have no proof of it
+
 vector<vector<int> >adj;
 bool vis[100050];
 int cnt,mod=1000000007;
