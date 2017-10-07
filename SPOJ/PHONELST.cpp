@@ -5,8 +5,6 @@
 #define ld long double
 #define IO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
 using namespace std;
-string prfx;
-bool f,ff;
 struct trie
 {
 	trie* child[10];
@@ -38,7 +36,8 @@ struct trie
 	}
 
 }t;
-
+int n;
+string a[10050];
 int main()
 {
     IO;
@@ -46,5 +45,15 @@ int main()
     while(tc--)
     {
         t=trie();
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+            t.insert(a[i],0);
+        }
+        bool ok=1;
+        for(int i=0;ok&&i<n;i++)
+            ok&=t.find(a[i],0);
+        cout<<(ok?"YES\n":"NO\n");
     }
 }
