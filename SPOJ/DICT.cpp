@@ -9,12 +9,12 @@ string prfx;
 bool f,ff;
 struct trie
 {
-	trie* child[10];
+	trie* child[26];
 	bool isleaf;
 	trie()
 	{
 	    isleaf=0;
-		for(int i=0;i<10;i++)
+		for(int i=0;i<26;i++)
             child[i]=NULL;
 	}
 	void insert(string &s,int i)
@@ -24,27 +24,52 @@ struct trie
             isleaf=1;
             return;
         }
-        int cur=s[i]-'0';
+        int cur=s[i]-'a';
         if(child[cur]==NULL)
             child[cur]=new trie();
         child[cur]->insert(s,i+1);
 	}
-	bool find(string &s,int i)
+	void find(string &s,int i)
 	{
-	    if(i==s.size())return 1;
-	    if(isleaf)return 0;
-	    int cur=s[i]-'0';
-	    return child[cur]->find(s,i+1);
+	    if(i==s.size())
+        {
+            ff=0;
+            travel("");
+            return;
+        }
+	    int cur=s[i]-'a';
+	    if(child[cur]==NULL)return;
+	    child[cur]->find(s,i+1);
+	}
+	void travel(string s)
+	{
+	    if(isleaf&&ff)
+            cout<<prfx<<s<<'\n',f=1;
+        ff=1;
+        for(int i=0;i<26;i++)
+            if(child[i]!=NULL)
+                child[i]->travel(s+char(i+'a'));
 	}
 
 }t;
-
+int n,k;
+string s;
 int main()
 {
     IO;
-    int tc; cin>>tc;
-    while(tc--)
+    cin>>n;
+    for(int i=0;i<n;i++)
     {
-        t=trie();
+        cin>>s;
+        t.insert(s,0);
+    }
+    cin>>k;
+    for(int tc=1;tc<=k;tc++)
+    {
+        cin>>prfx;
+        f=0;
+        cout<<"Case #"<<tc<<":\n";
+        t.find(prfx,0);
+        if(!f)cout<<"No match.\n";
     }
 }
