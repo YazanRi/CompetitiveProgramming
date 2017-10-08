@@ -4,17 +4,17 @@ using namespace std;
 vector<vector<int> >val;
 struct trie
 {
-	trie* child[26];
-	bool leaf;
-	trie()
-	{
-	    leaf=0;
-	    for(int i=0;i<26;i++)
+    trie* child[26];
+    bool leaf;
+    trie()
+    {
+        leaf=0;
+        for(int i=0; i<26; i++)
             child[i]=NULL;
-	}
-	void insert(string &s,int i=0)
-	{
-		if(i==s.size())
+    }
+    void insert(string &s,int i=0)
+    {
+        if(i==s.size())
         {
             leaf=1;
             return;
@@ -23,15 +23,15 @@ struct trie
         if(child[cur]==NULL)
             child[cur]=new trie();
         child[cur]->insert(s,i+1);
-	}
-	bool find(string &s,int i=0)
-	{
-	    if(i==s.size())return leaf;
+    }
+    bool find(string &s,int i=0)
+    {
+        if(i==s.size())return leaf;
         int cur=s[i]-'a';
         if(child[cur]==NULL)return 0;
         return child[cur]->find(s,i+1);
-	}
-}t;
+    }
+} t;
 int n,m,p;
 char x[11];
 int v[11];
@@ -49,7 +49,7 @@ int main()
 {
     IO;
     cin>>n;
-    for(int i=0;i<n;i++)
+    for(int i=0; i<n; i++)
     {
         cin>>s;
         sort(s.begin(),s.end());
@@ -59,7 +59,7 @@ int main()
     while(m--)
     {
         cin>>p;
-        for(int i=0;i<p;i++)
+        for(int i=0; i<p; i++)
             cin>>x[i]>>v[i];
         cout<<getmax()<<'\n';
     }
